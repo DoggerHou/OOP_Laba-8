@@ -21,17 +21,17 @@ namespace OOP_Laba_8
         }
 
 
-        public void notifyEveryone(Storage o)
+        public void notifyTree()
         {
             foreach (var obj in _observers)
-                obj.OnStorageChanged(this, o);
+                obj.OnStorageChanged(this);
         }
 
 
-        public void notifyObjects(Model who, int _x, int _y)
+        public void notifyObjects(int _x, int _y)
         {
             foreach (var obj in _observers)
-                obj.OnObjectChanged(who, _x, _y);
+                obj.OnObjectChanged(this, _x, _y);
         }
 
         public TreeNode gett()
@@ -43,8 +43,8 @@ namespace OOP_Laba_8
 
     public interface IObserver
     {
-        void OnStorageChanged(Observerable who, Storage o);
-        void OnObjectChanged(Model who, int _x, int _y);
+        void OnStorageChanged(Observerable who);
+        void OnObjectChanged(Observerable who, int _x, int _y);
     }
 
 
@@ -80,12 +80,12 @@ namespace OOP_Laba_8
 
         }
 
-        public void OnStorageChanged(Observerable who, Storage o)
+        public void OnStorageChanged(Observerable who)
         {
             tn.Nodes.Clear();
             tn.Text = "Storage";
-            for(int i = 0;i<o.getStorageSize();i++)
-                processNode(tn, o.getObject(i));
+            for(int i = 0;i<((Storage)who).getStorageSize();i++)
+                processNode(tn, ((Storage)who).getObject(i));
         }
 
 
@@ -95,7 +95,7 @@ namespace OOP_Laba_8
         }
 
 
-        public void OnObjectChanged(Model who, int _x, int _y) {}
+        public void OnObjectChanged(Observerable who, int _x, int _y) {}
     }
 
 
@@ -106,17 +106,17 @@ namespace OOP_Laba_8
         {
             stickyStorage = o;
         }
-        public void OnObjectChanged(Model who, int _x, int _y)
+        public void OnObjectChanged(Observerable who, int _x, int _y)
         {
-            for(int i =0;i<stickyStorage.getStorageSize(); i++)
+            for(int i = 0;i<stickyStorage.getStorageSize(); i++)
             {
-                if(stickyStorage.getObject(i) != who)
-                    if(stickyStorage.getObject(i).isSticked(who))
-                        stickyStorage.getObject(i).MoveObject(_x, _y);
+                if(stickyStorage.getObject(i) != (Model)who && stickyStorage.getObject(i).isSticked((Model)who))
+                    stickyStorage.getObject(i).MoveObject(_x, _y);
             }
         }
 
-        public void OnStorageChanged(Observerable who, Storage o) { }
+
+        public void OnStorageChanged(Observerable who) { }
 
     }
 }

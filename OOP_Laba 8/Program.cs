@@ -100,7 +100,8 @@ namespace OOP_Laba_8
         //Изменить местоположение объекта
         public virtual void MoveObject(int _X, int _Y) 
         {
-            notifyObjects(this, _X, _Y);
+            if(sticky)
+                notifyObjects( _X, _Y);
 
             if (isMovable(_X, _Y))
             {
@@ -386,7 +387,8 @@ namespace OOP_Laba_8
 
         public override void MoveObject(int _X, int _Y)
         {
-            notifyObjects(this, _X, _Y);
+            if (sticky)
+                notifyObjects(_X, _Y);
 
             if (isMovable(_X, _Y))
             {
@@ -449,7 +451,7 @@ namespace OOP_Laba_8
             for (int i = 0; i < objects.Count(); i++) //Если попали в объект, то выходим
                 if (objects[i].isPicked(e, controlUp)) //(чтобы не рисовать новый)
                 {
-                    notifyEveryone(this);
+                    notifyTree();
                     return;
                 }
 
@@ -458,7 +460,7 @@ namespace OOP_Laba_8
                 if(!(objects[i] is Group))
                     objects[i].changeDetail_to(false);
 
-            notifyEveryone(this);
+            notifyTree();
         }
 
 
@@ -468,7 +470,7 @@ namespace OOP_Laba_8
             for (int i = objects.Count() - 1; i >= 0; i--)
                 if (objects[i].isDetailed() )
                     objects.RemoveAt(i);
-            notifyEveryone(this);
+            notifyTree();
         }
 
 
@@ -489,7 +491,7 @@ namespace OOP_Laba_8
             else
                 objects.Add(g);
 
-            notifyEveryone(this);
+            notifyTree();
         }
 
 
@@ -504,7 +506,7 @@ namespace OOP_Laba_8
                     objects.RemoveAt(i);
                 }
             }
-            notifyEveryone(this);
+            notifyTree();
         }
 
 
@@ -546,7 +548,7 @@ namespace OOP_Laba_8
                 }
             }
             load.Close();
-            notifyEveryone(this);
+            notifyTree();
         }
 
     }
