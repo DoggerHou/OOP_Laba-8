@@ -205,6 +205,7 @@ namespace OOP_Laba_8
             // 
             this.treeView1.BackColor = System.Drawing.SystemColors.Control;
             this.treeView1.CheckBoxes = true;
+            this.treeView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.treeView1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.treeView1.Location = new System.Drawing.Point(3, 3);
             this.treeView1.Name = "treeView1";

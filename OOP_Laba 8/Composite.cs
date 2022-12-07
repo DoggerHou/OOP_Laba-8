@@ -151,7 +151,8 @@ namespace OOP_Laba_8
         //Двигает ВСЕ объекты группы
         public override void MoveObject(int _X, int _Y)
         {
-            notifyObjects(this, _X, _Y);
+            if (sticky)
+                notifyObjects( _X, _Y);
 
             if (isMovable(_X, _Y))
                 foreach (var obj in groupObjects)
